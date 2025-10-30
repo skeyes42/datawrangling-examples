@@ -1,0 +1,31 @@
+# Copyright 2025 by Steven J. Keyes. All rights reserved.
+# FILE: Example_16_BoxscoresReticulate.py
+# DATE 2025-10-16
+# DESCRIPTION: 
+
+
+import sqlite3
+import pandas as pd
+import os
+
+def getBoxscores(dbname, table_name):
+
+    # The 'with' statement ensures the connection is properly closed
+    try:
+        with sqlite3.connect(dbname) as conn:
+            # Construct the SQL query to select all data from the table
+            query = f"SELECT * FROM {table_name}"
+            
+            # Use pandas.read_sql_query to execute the query and load the data
+            df = pd.read_sql_query(query, conn)
+            
+    except sqlite3.Error as e:
+        return None
+    except pd.io.sql.DatabaseError as e:
+        return None
+    except FileNotFoundError:
+        return None
+    except Exception as e:
+        return None
+    
+    return(df)
