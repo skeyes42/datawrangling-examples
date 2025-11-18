@@ -1,0 +1,15 @@
+# A tibble: 12 × 15
+   GAME_ID   FGM   FGA  FG3M  FG3A   FTM   FTA FG_PCT FG3_PCT FT_PCT   PTS SCORE WIN_LOSS PLAYER_NAME TEAM_NAME
+     <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>   <dbl>  <dbl> <dbl> <dbl>    <dbl> <chr>       <chr>    
+ 1    1000    10    13    12    13    12    12   76.9    92.3  100      44    63        1 Fred        Pacers   
+ 2    1000     4    16     4     8     7     8   25      50     87.5    19    63        1 John        Pacers   
+ 3    1000     2    20     6    13     5    12   10      46.2   41.7    15    40        0 Trevor      Wizards  
+ 4    1000     8    16     2     8     7     8   50      25     87.5    25    40        0 Alex        Wizards  
+ 5    2000    10    21     4    13    10    12   47.6    30.8   83.3    34    65        1 Fred        Pacers   
+ 6    2000    11    16     5     8     4     8   68.8    62.5   50      31    65        1 John        Pacers   
+ 7    2000     8    14    10    13     9    12   57.1    76.9   75      35    58        0 Jim         Celtics  
+ 8    2000     7    16     6     8     3     8   43.8    75     37.5    23    58        0 Steve       Celtics  
+ 9    3000     5    13     7    13     9    12   38.5    53.8   75      26    40        0 Trevor      Wizards  
+10    3000     3    17     2     8     6     8   17.6    25     75      14    40        0 Alex        Wizards  
+11    3000     4     8     4    13    11    12   50      30.8   91.7    23    45        1 Jim         Celtics  
+12    3000     8    16     3     8     3     8   50      37.5   37.5    22    45        1 Steve       Celtics  
