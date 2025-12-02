@@ -23,7 +23,7 @@ with sqlite3.connect(path_to_database) as db_connection:
     # in the database. The `if_exists` parameter handles what to 
     # do if the table already exists. index=False prevents pandas 
     # from writing the DataFrame index as a column.
-    df_boxscores.to_sql("Boxscores", db_connection, if_exists='replace', 
+    df_boxscores.to_sql("Boxscores", db_connection, if_exists='append', 
                         index=False)
 
 # In Python, you can print the DataFrame head or use a more advanced 

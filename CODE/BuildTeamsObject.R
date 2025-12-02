@@ -42,7 +42,7 @@ get_Teams_instance <- function(db_path) {
 }
 
 # Set path to Teams database
-path_to_database <- paste0(Sys.getenv("EXAMPLES"), "Boxscores.db")
+path_to_database <- file.path(Sys.getenv("EXAMPLES"), "Boxscores.db")
 
 # Instantiate the Teams class
 teams_object <- get_Teams_instance(path_to_database)

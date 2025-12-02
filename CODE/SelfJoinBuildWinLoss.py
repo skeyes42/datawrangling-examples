@@ -96,3 +96,5 @@ joined_df.to_sql(name='Boxscores', con=con, if_exists='replace', index=False)
 con.close()
 
 print(joined_df)
+
+joined_df.to_csv("boxscore.csv")

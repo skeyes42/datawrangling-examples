@@ -42,7 +42,7 @@ get_Players_instance <- function(db_path) {
 }
 
 # Set path to Players database
-path_to_database <- paste0(Sys.getenv("EXAMPLES"), "Boxscores.db")
+path_to_database <- file.path(Sys.getenv("EXAMPLES"), "Boxscores.db")
 
 # Instantiate the Players class
 players_object <- get_Players_instance(path_to_database)

@@ -15,13 +15,15 @@ con <- dbConnect(RSQLite::SQLite(), path_to_database)
 table_names <- dbListTables(con)
 print(table_names)
 
-print('--------------------------------------------------------------')
+print('----------------------------------------------')
 
 # Setup table name
 table_name <- "Boxscores" 
 
 # Execute the PRAGMA statement to get table info
-column_info <- dbGetQuery(con, paste0("PRAGMA table_info(", table_name, ");"))
+column_info <- dbGetQuery(con, 
+                          paste0("PRAGMA table_info(", 
+                          table_name, ");"))
 
 # Print the column names
 print(column_info)

@@ -45,7 +45,7 @@ get_Boxscores_instance <- function(db_path) {
 }
 
 # Set path to Boxscores database
-path_to_database <- paste0(Sys.getenv("EXAMPLES"), "Boxscores.db")
+path_to_database <- file.path(Sys.getenv("EXAMPLES"), "Boxscores.db")
 
 # Instantiate the Cars class
 boxscores_object <- get_Boxscores_instance(path_to_database)

@@ -7,7 +7,8 @@ import sqlite3
 import os
 
 # Get the database path from environment variable
-path_to_database = os.path.join(os.environ.get("EXAMPLES", ""), "Boxscores.db")
+path_to_database = os.path.join(
+    os.environ.get("EXAMPLES", ""), "Boxscores.db")
 
 # Establish a connection to the SQLite database
 con = sqlite3.connect(path_to_database)

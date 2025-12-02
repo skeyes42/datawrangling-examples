@@ -4,8 +4,8 @@
 # DESCRIPTION: 
 
 # Set up the paths
-path_to_library  <- paste0(Sys.getenv("EXAMPLES"), "LIBRARY/")
-path_to_database <- paste0(Sys.getenv("EXAMPLES"), "Boxscores.db")
+path_to_library  <- file.path(Sys.getenv("EXAMPLES"), "LIBRARY/")
+path_to_database <- file.path(Sys.getenv("EXAMPLES"), "Boxscores.db")
 
 # Get Boxscores class from library
 source(paste0(path_to_library, "BoxscoresClass.R"))

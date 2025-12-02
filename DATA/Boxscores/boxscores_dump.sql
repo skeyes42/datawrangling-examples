@@ -1,5 +1,5 @@
 /* Direct output to file */
-.output "results.csv"
+.output "data.csv"
 
 /* Set format of output to csv */
 .mode csv

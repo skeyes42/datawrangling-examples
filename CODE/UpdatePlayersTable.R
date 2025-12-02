@@ -7,7 +7,7 @@ library(DBI)
 library(RSQLite)
 library(readr)
 
-path_to_database <- paste0(Sys.getenv("EXAMPLES"), "Boxscores.db")
+path_to_database <- file.path(Sys.getenv("EXAMPLES"), "Boxscores.db")
 
 # Connect to a database
 con <- dbConnect(RSQLite::SQLite(), path_to_database)

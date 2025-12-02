@@ -10,7 +10,7 @@ library(readr)
 library(stringr)
 
 # Connect to database
-path_to_database <- paste0(Sys.getenv("EXAMPLES"), "Boxscores.db")
+path_to_database <- file.path(Sys.getenv("EXAMPLES"), "Boxscores.db")
 con <- dbConnect(RSQLite::SQLite(), path_to_database)
 
 # Check if 'PTS' column exists in the 'Boxscores' table

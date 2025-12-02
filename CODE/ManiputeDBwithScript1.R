@@ -9,7 +9,7 @@ library(readr)
 
 execute_script <- function(con, script_name) {
   # Path to script
-  path_to_script <- paste0(Sys.getenv("EXAMPLES"), script_name)
+  path_to_script <- file.path(Sys.getenv("EXAMPLES"), script_name)
   
   # Read the SQL script file into a character string
   # `readLines` reads each line, and `paste` collapses it into a 

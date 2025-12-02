@@ -26,7 +26,7 @@ getBoxscores <- function(path_to_database) {
   return(results_df)
 }
 
-path_to_database <- paste0(Sys.getenv("EXAMPLES"), "Boxscores.db")
+path_to_database <- file.path(Sys.getenv("EXAMPLES"), "Boxscores.db")
 df <- getBoxscores(path_to_database)
 
 # Store the valid answers in a vector

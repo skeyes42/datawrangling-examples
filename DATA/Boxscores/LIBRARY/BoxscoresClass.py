@@ -2,22 +2,14 @@ import sqlite3
 import pandas as pd
 
 class Boxscores:
-    """Class to handle Boxscores database operations."""
+  
     
     def __init__(self, path_to_database=""):
-        """Initialize with path to database.
         
-        Args:
-            path_to_database: Path to the SQLite database file
-        """
         self.path = path_to_database
     
     def boxscores_dataframe(self):
-        """Retrieve and merge data from Boxscores, Players, and Teams tables.
-        
-        Returns:
-            pandas.DataFrame: Merged dataframe with PLAYER_ID and TEAM_ID removed
-        """
+       
         # Connect to database
         con = sqlite3.connect(self.path)
         
@@ -42,13 +34,6 @@ class Boxscores:
 
 
 def get_boxscores_instance(db_path):
-    """Factory function to create a Boxscores instance.
-    
-    Args:
-        db_path: Path to the database
-        
-    Returns:
-        Boxscores: New Boxscores instance
-    """
+
     return Boxscores(path_to_database=db_path)
 

@@ -11,11 +11,11 @@ library(reticulate)
 
 # Source the Python script containing the getBoxscores function
 # Make sure the file path is correct for your system.
-source_python("Example_16_BoxscoresReticulate.py")
+source_python("BoxscoresReticulate.py")
 
 # Define the database and table names.
 # Adjust the file path to point to your database.
-db <- paste0(Sys.getenv("EXAMPLES"), "Boxscores.db")
+db <- file.path(Sys.getenv("EXAMPLES"), "Boxscores.db")
 table <- 'Boxscores'
 
 # Call the Python function.

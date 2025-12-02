@@ -143,7 +143,7 @@ get_team_name <- function(team_id, teams_info) {
   teams_info$TEAM_NAME[teams_info$TEAM_ID == team_id]
 }
 
-path_to_database <- paste0(Sys.getenv("EXAMPLES"), "Boxscores.db")
+path_to_database <- file.path(Sys.getenv("EXAMPLES"), "Boxscores.db")
 data <- load_season_from_db(path_to_database)
 
 season <- data$season
