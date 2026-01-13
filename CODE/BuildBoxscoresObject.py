@@ -1,7 +1,10 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_11_BuildBoxscoresObject.py
+# FILE: BuildBoxscoresObject.py
 # DATE 2025-10-20
 # DESCRIPTION: 
+# This Python program is a data retrieval tool designed to extract sports 
+# statistics from a SQLite database and combine them into a single, 
+# readable Pandas DataFrame. 
 
 import sqlite3
 import pandas as pd

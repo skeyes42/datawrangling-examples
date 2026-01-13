@@ -2,7 +2,11 @@
 # FILE: OOviewOfBoxscoreData.R
 # DATE 2025-11-13
 # DESCRIPTION: 
-# Load required libraries
+# This R program is a data modeling and transformation tool. 
+# Its main objective is to read flat data tables from a database 
+# and reconstruct them into a structured, hierarchical collection 
+# of R objects that mimic the physical world of a basketball 
+# season (Season -> Game -> Team -> Player).
 
 library(DBI)
 library(RSQLite)
@@ -71,6 +75,7 @@ load_season_from_db <- function(db_path) {
   
   # Process each game
   for (game_id in game_ids) {
+    
     # Get all boxscore entries for this game
     game_boxscores <- boxscores[boxscores$GAME_ID == game_id, ]
     

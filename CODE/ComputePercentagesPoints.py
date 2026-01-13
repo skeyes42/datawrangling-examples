@@ -1,7 +1,10 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_6_ComputePercentagesPoints.py
+# FILE: ComputePercentagesPoints.py
 # DATE 2025-10-19
 # DESCRIPTION: 
+# This Python program is a data pipeline designed to automate the calculation of 
+# basketball statistics (field goal percentages and total points) and update a 
+# database with the new results.
 
 import os
 import sqlite3

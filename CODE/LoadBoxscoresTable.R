@@ -1,7 +1,9 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_1_LoadBoxscoresTable.R
+# FILE: LoadBoxscoresTable.R
 # DATE 2025-10-12
-# DESCRIPTION: Load table from csv file.
+# DESCRIPTION: 
+# This R program is a data ingestion pipeline designed to transfer 
+# information from a flat CSV file into a structured SQLite database.
 
 library(RSQLite)
 library(DBI)
@@ -19,7 +21,7 @@ db_connection <- dbConnect(RSQLite::SQLite(), path_to_database)
 df_boxscores <- read_csv(path_to_csv, show_col_types = FALSE)
 
 # Append data to Boxscores table
-dbAppendTable(db_connection, "Boxscores", df_boxscores)
+dbWriteTable(db_connection, "Boxscores", df_boxscores, overwrite = TRUE)
 
 # Disconnect
 dbDisconnect(db_connection)

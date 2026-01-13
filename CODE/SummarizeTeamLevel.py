@@ -1,7 +1,12 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_8_SummarizeTeamLevel.py
+# FILE: SummarizeTeamLevel.py
 # DATE 2025-10-20
 # DESCRIPTION: 
+# This Python program processes basketball statistics to generate a 
+# team-level performance summary for a specific season. It extracts 
+# raw data from an SQLite database, performs multi-level aggregations 
+# using pandas, and saves the summarized results into a new database 
+# table.
 
 import os
 import pandas as pd

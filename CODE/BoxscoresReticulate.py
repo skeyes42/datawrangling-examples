@@ -1,7 +1,10 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_16_BoxscoresReticulate.py
+# FILE: BoxscoresReticulate.py
 # DATE 2025-10-16
 # DESCRIPTION: 
+# This program defines a specialized Python function, getBoxscores, 
+# designed to safely extract data from a SQLite database and convert 
+# it into a Pandas DataFrame.
 
 
 import sqlite3

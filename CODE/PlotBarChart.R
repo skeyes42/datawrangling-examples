@@ -1,13 +1,17 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_22_PlotBarChart.R
+# FILE: PlotBarChart.R
 # DATE 2025-10-27
 # DESCRIPTION: 
+# This R program connects to a sports database to extract, process, and 
+# visualize the performance statistics of a specific player named "John."
 
 library(tidyverse)
 library(RSQLite)
 library(DBI)
 library(dplyr)
 library(readr)
+library(ggplot2)
+library(ggpattern)
 
 path_to_scripts <- Sys.getenv("EXAMPLES")
 
@@ -34,18 +38,29 @@ results_long_df <- results_df |>
     cols = c(FGM, FG3M, FTM),  # Columns to pivot
     names_to = "Stat_Type",     # New column for the variable names
     values_to = "Count"         # New column for the values
-  )
+  ) |> write_csv("Results_Long.csv")
+    
 
-# Create the grouped bar chart
+
+
+
 p <- ggplot(results_long_df, aes(x = factor(GAME_ID), y = Count, fill = Stat_Type)) +
-  geom_bar(stat = "identity", position = "dodge") +
+  geom_bar_pattern(
+    aes(pattern = Stat_Type),
+    stat = "identity", 
+    position = "dodge",
+    fill = "gray70",
+    pattern_fill = "black",
+    pattern_density = 0.1,
+    pattern_spacing = 0.025
+  ) +
+  scale_pattern_manual(values = c("FGM" = "stripe", "FG3M" = "crosshatch", "FTM" = "circle")) +
   labs(
     title = "FGM, FG3M, and FTM by Game for John",
     x = "Game ID",
     y = "Count",
-    fill = "Statistic"
+    pattern = "Statistic"
   ) +
-  scale_fill_manual(values = c("FGM" = "steelblue", "FG3M" = "darkorange", "FTM" = "darkgreen")) +
   theme_minimal()
 
 print(p)

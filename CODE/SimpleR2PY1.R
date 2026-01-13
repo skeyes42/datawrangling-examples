@@ -1,7 +1,9 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_17a_SimpleR2PY.R
+# FILE: SimpleR2PY.R
 # DATE 2025-10-17
 # DESCRIPTION: 
+# This is a fundamental R function designed to perform a mathematical 
+# transformation on data. 
 
 # This R function takes a numeric vector, performs a calculation,
 # and returns a numeric vector.

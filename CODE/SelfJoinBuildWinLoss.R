@@ -1,7 +1,10 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_7_SelfJoinBuildWinLoss.R
+# FILE: SelfJoinBuildWinLoss.R
 # DATE 2025-10-13
 # DESCRIPTION: 
+# This R program is a data enrichment pipeline for a basketball database. 
+# Its primary purpose is to calculate team scores and determine game winners, 
+# then save those results back into the database and a CSV file.
 
 library(RSQLite)
 library(DBI)
@@ -62,7 +65,7 @@ boxscores_df <- tbl(con, "Boxscores") |> collect()
 
 joined_df <- left_join(boxscores_df, results_df, by = c("GAME_ID", "TEAM_ID")) 
 
-print(joined_df)
+print(joined_df, width = Inf)
 
 # Put the new data back into the database: overwrite the Boxscores table
 dbWriteTable(

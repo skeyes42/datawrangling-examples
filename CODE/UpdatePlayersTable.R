@@ -1,7 +1,9 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_4_UpdatePlayersTable.R
+# FILE: UpdatePlayersTable.R
 # DATE 2025-10-13
-# DESCRIPTION: Update Players table
+# DESCRIPTION:
+#  This R program connects to an SQLite database and performs a targeted 
+#  data modification to update a specific record in the Players table.
 
 library(DBI)
 library(RSQLite)

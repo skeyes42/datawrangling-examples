@@ -1,6 +1,5 @@
 import pandas as pd
 
-# Define the DataFrame using vectors of literal data
 df = pd.DataFrame({
     'GAME_ID': [1000, 1000, 1000, 1000, 2000, 2000, 2000, 2000],
     'TEAM_ID': [100, 100, 200, 200, 100, 100, 300, 300],
@@ -10,19 +9,12 @@ df = pd.DataFrame({
     'FTM': [12, 7, 5, 7, 10, 4, 9, 3]
 })
 
+result = (
+    df
+    .assign(TOTAL_PTS = lambda x: 2*x['FGM'] + 3*x['FG3M'] + x['FTM'])
+    .groupby(['GAME_ID', 'TEAM_ID'], as_index=False)
+    .agg(TEAM_PTS=('TOTAL_PTS', 'sum'))
+    .sort_values(['GAME_ID', 'TEAM_PTS'], ascending=[True, False])
+)
 
-# Apply transformations using method chaining
-df = (df
-      .assign(SCORING_EFFORT=lambda x: x['FGM'] + x['FG3M'] + x['FTM'])
-      .query('SCORING_EFFORT > 19')
-     )
-
-print(df)
-
-df1 = df
-
-# An alternative way to express the above.
-df1 = df1.assign(SCORING_EFFORT=
-    lambda x: x['FGM'] + x['FG3M'] + x['FTM']).query('SCORING_EFFORT > 19')
-
-print(df1)
+print(result)

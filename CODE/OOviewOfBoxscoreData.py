@@ -1,7 +1,12 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
 # FILE: oo_view_of_boxscore_data.py
 # DATE 2025-11-13
-# DESCRIPTION: Python equivalent of OOviewOfBoxscoreData.py
+# DESCRIPTION: 
+# This Python program is a Data Modeling tool that transforms 
+# raw database rows into a structured, hierarchical object model 
+# (often called Object-Relational Mapping or ORM). It is designed 
+# to represent the 2025/2026 basketball season as a collection of 
+# nested Python objects.
 
 import sqlite3
 import os
@@ -43,15 +48,6 @@ class Season2025:
 
 
 def load_season_from_db(db_path: str) -> dict:
-    """
-    Load data from SQLite database and create Season2025 object
-    
-    Args:
-        db_path: Path to the SQLite database file
-        
-    Returns:
-        Dictionary containing season object and reference tables
-    """
     # Connect to the database
     con = sqlite3.connect(db_path)
     

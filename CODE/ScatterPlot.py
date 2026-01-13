@@ -2,9 +2,14 @@
 # FILE: Example_24_ScatterPlot.py
 # DATE 2025-10-27
 # DESCRIPTION: 
+# This program performs a full data pipeline: it joins multiple 
+# database tables, cleans the resulting data, and generates a 
+# high-quality scatter plot visualizing basketball performance.
 
 import sqlite3
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')  # Add this before importing pyplot
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
@@ -34,15 +39,16 @@ results_df = results_df.drop(columns=['PLAYER_ID', 'TEAM_ID'])
 # Close database connection
 con.close()
 
-# Create scatter plot
 plt.figure(figsize=(10, 6))
 sns.scatterplot(
     data=results_df,
     x='FG3M',
     y='FGM',
-    hue='Player',
+    style='Player',  # Use 'style' instead of 'hue' for different markers
     s=100,
-    alpha=0.7
+    color='gray',    # Single color for all points
+    edgecolor='black',
+    linewidth=1
 )
 
 plt.title('Field Goals Made vs 3-Point Field Goals Made', 
@@ -51,4 +57,4 @@ plt.xlabel('3-Point Field Goals Made (FG3M)', fontsize=12)
 plt.ylabel('Field Goals Made (FGM)', fontsize=12)
 plt.legend(title='Player ID', bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.tight_layout()
-plt.show()
+plt.savefig('scatter_plot.png', dpi=300, bbox_inches='tight')

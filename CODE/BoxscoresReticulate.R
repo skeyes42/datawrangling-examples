@@ -1,8 +1,11 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_16_BoxscoresReticulate.R
+# FILE: BoxscoresReticulate.R
 # DATE 2025-10-17
 # DESCRIPTION: 
-
+# This program uses the reticulate library in R to bridge the gap 
+# between R and Python. Its primary purpose is to execute a specific 
+# data-retrieval function written in Python and bring that data into 
+# the R environment for analysis. 
 
 # R script to call the Python function
 

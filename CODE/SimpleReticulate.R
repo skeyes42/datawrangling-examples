@@ -1,7 +1,12 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_15_SimpleReticulate.R
+# FILE: SimpleReticulate.R
 # DATE 2025-10-15
 # DESCRIPTION: 
+# This R program demonstrates a sophisticated use of the reticulate 
+# library to integrate Python capabilities directly into an R 
+# environment. It specifically sets up a workspace to interact with 
+# NBA data using Python's nba_api.
+
 
 library(reticulate)
 
@@ -13,7 +18,7 @@ pandas_module <- reticulate::import("pandas")
 nba_api       <- reticulate::import("nba_api")
 
 # Source the Python script
-reticulate::source_python("Example_15_SimpleReticulate.py")
+reticulate::source_python("SimpleReticulate.py")
 
 lebron_id <- get_player_id("LeBron James")
 

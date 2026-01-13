@@ -1,8 +1,12 @@
 
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_7_SelfJoinBuildWinLoss.py
+# FILE: SelfJoinBuildWinLoss.py
 # DATE 2025-10-19
-# DESCRIPTION: Corrected Python script to calculate Win/Loss records.
+# DESCRIPTION: 
+# This program updates a database by calculating game scores and 
+# win/loss outcomes for basketball teams, then merging those results 
+# back into the main dataset. It essentially automates the "standings" 
+# calculation for a set of boxscore data.
 
 import sqlite3
 import pandas as pd

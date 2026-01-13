@@ -1,7 +1,11 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_0_GetBoxscoresDBinfo.R
+# FILE: GetBoxscoresDBinfo.R
 # DATE 2025-10-19
 # DESCRIPTION: 
+# This R program is a database schema inspection tool. Its primary 
+# purpose is to help a developer or analyst understand the internal 
+# structure of a SQLite database—specifically, what tables exist and 
+# what columns are inside them.
 
 library(DBI)
 library(RSQLite)

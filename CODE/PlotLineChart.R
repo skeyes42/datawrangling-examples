@@ -1,7 +1,11 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_23_PlotLineChart.R
+# FILE: PlotLineChart.R
 # DATE 2025-10-26
 # DESCRIPTION: 
+# This R program performs the same analysis as the Python script you previously 
+# reviewed: it connects to a basketball database, extracts data on team wins 
+# versus shooting percentages from the 2025 season, and generates a line plot to 
+# visualize the relationship between these two variables.
 
 # Load required libraries
 library(RSQLite)

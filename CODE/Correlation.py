@@ -1,7 +1,10 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_27_Correlation.py
+# FILE: Correlation.py
 # DATE 2025-11-04
 # DESCRIPTION: 
+# This Python program is a statistical analysis tool designed to 
+# identify relationships between different basketball performance 
+# metrics using a correlation matrix.
 
 import pandas as pd
 import sqlite3

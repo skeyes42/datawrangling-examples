@@ -1,11 +1,16 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_2_RetrieveBoxscoresTable.R
+# FILE: RetrieveBoxscoresTable.R
 # DATE 2025-10-13
 # DESCRIPTION: 
+# This R program connects to an SQLite database, retrieves all records 
+# from a table called Boxscores, displays the data, and saves it as a 
+# CSV file. It is built with robust error handling to manage issues like 
+# missing database files or connection failures.
 
 library(RSQLite)
 library(DBI)
 library(dplyr)
+library(readr)
 
 # Connect to database with error handling
 path_to_database <- file.path(Sys.getenv("EXAMPLES"), "Boxscores.db")
@@ -33,8 +38,10 @@ tryCatch({
   
   # Disconnect
   dbDisconnect(con)
+
+  write_csv(results_df, "BoxscoresTable_Full.csv")
   
-  print(results_df)
+  print(results_df, width = Inf)
   print("Done")
   
 }, error = function(e) {

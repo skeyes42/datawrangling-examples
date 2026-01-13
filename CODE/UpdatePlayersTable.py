@@ -1,7 +1,11 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_4_UpdatePlayersTable.py
+# FILE: UpdatePlayersTable.py
 # DATE 2025-10-19
 # DESCRIPTION: 
+# This Python program connects to an SQLite database and performs a data 
+# modification operation, specifically updating a player's name within 
+# the Players table. It demonstrates how to execute SQL commands that 
+# alter data stored in a database file.
 
 import os
 import sqlite3

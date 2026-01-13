@@ -1,7 +1,11 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_25_FunctionToManiputeDB.py
+# FILE: FunctionToManiputeDB.py
 # DATE 2025-10-26
 # DESCRIPTION:
+# This Python program is a database administration script designed to 
+# completely reset a SQLite database to a known, empty state. It uses 
+# the operating system's command line to execute SQL scripts, 
+# demonstrating a powerful way to manage database structure.
 
 import os
 import sqlite3

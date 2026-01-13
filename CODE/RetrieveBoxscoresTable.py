@@ -1,6 +1,9 @@
-# FILE: Example_2_RetrieveBoxscoresTable.py
+# FILE: RetrieveBoxscoresTable.py
 # DATE 2025-10-19
-# DESCRIPTION: Retrieves all rows from the Boxscores table in a SQLite database.
+# DESCRIPTION: 
+# This Python program retrieves all data from a specific table within an 
+# SQLite database and displays it as a formatted table using the pandas 
+# library. 
 
 import sqlite3
 import pandas as pd

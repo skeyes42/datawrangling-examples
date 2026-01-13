@@ -1,7 +1,10 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_15_SimpleReticulate.py
+# FILE: SimpleReticulate.py
 # DATE 2025-10-16
 # DESCRIPTION: 
+# This Python program is a utility script that interacts 
+# with the nba_api library to look up a specific basketball 
+# player's unique identification number. 
 
 import pandas as pd
 from nba_api.stats.static import players

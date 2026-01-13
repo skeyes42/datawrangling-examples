@@ -1,7 +1,10 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_1_LoadBoxscoresTable.py
+# FILE: LoadBoxscoresTable.py
 # DATE 2025-10-19
 # DESCRIPTION: 
+# This Python program is a data ingestion tool designed to import 
+# information from a CSV (Comma-Separated Values) file and upload 
+# it into an existing SQLite database.
 
 import os
 import pandas as pd

@@ -1,7 +1,13 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_5_SimpleJoinBoxscores.py
+# FILE: SimpleJoinBoxscores.py
 # DATE 2025-10-19
 # DESCRIPTION: 
+# This Python program retrieves and integrates basketball data 
+# from an SQLite database using the pandas library. It follows 
+# a classic data science pipeline: connecting to a source, 
+# extracting raw tables, cleaning and merging them into a 
+# human-readable format, and finally sorting and refining the 
+# output.
 
 import sqlite3
 import os

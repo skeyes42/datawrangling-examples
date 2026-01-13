@@ -1,46 +1,61 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_25_FunctionToManiputeDB.R
-# DATE 2025-10-26
+# FILE: ManiputeDBwithScript.R
+# DATE 2025-10-27
 # DESCRIPTION: 
+# This R program is a database rebuild script. It is designed to perform a "hard reset" 
+# of a sports database by deleting existing structures, recreating them from official 
+# blueprints (SQL files), and then repopulating them with fresh data from CSV files.
 
 library(DBI)
 library(RSQLite)
 library(readr)
 
-# Create connection to database
-path_to_database <- file.path(Sys.getenv("EXAMPLES"), "Boxscores.db")
+execute_script <- function(con, script_name) {
+  # Path to script
+  path_to_script <- file.path(Sys.getenv("EXAMPLES"), script_name)
+  
+  # Read the SQL script file into a character string
+  # `readLines` reads each line, and `paste` collapses it into a 
+  # single string.
+  sql_script <- paste(readLines(path_to_script), collapse = "\n")
+  
+  # Execute the SQL script
+  # dbExecute() is used for non-query commands (like CREATE or INSERT).
+  # For SELECT queries, you would use `dbGetQuery()` instead.
+  dbExecute(con, sql_script)
+}
+
+load_table <-function(con, table_name, path_to_csv_file) {
+  df <- read_csv(path_to_csv_file, show_col_types = FALSE)
+  dbAppendTable(con, table_name, df)
+}
+
+# Connect to database
+path_to_database <- paste0(Sys.getenv("EXAMPLES"), "Boxscores.db")
+
+# Connect to a database
 con <- dbConnect(RSQLite::SQLite(), path_to_database)
 
+# Drop Boxscores, Players and Teams tables
+execute_script(con, "drop_boxscores_table.sql")
+execute_script(con, "drop_players_table.sql")
+execute_script(con, "drop_teams_table.sql")
 
-# Setup path_to_script
-path_to_scripts <- Sys.getenv("EXAMPLES")
+# Create Tables
+execute_script(con, "boxscores_create_table.sql")
+execute_script(con, "players_create_table.sql")
+execute_script(con, "teams_create_table.sql")
 
-# Change working directory
-setwd(path_to_scripts)
+# Reload database
+load_table(con, "Boxscores", paste0(Sys.getenv("EXAMPLES"), "boxscores.csv"))
+load_table(con, "Players", paste0(Sys.getenv("EXAMPLES"), "player_id.csv"))
+load_table(con, "Teams", paste0(Sys.getenv("EXAMPLES"), "team_id.csv"))
 
-# Get list of tables before
-before <- dbListTables(con)
-print('--- before ---')
-print(before)
+# Get table names
+table_names <- dbListTables(con)
+print(table_names)
 
-# # Drop all tables
-system("sqlite3 Boxscores.db '.read drop_all_tables.sql'")
-
-# Get list of tables after dropping
-after <- dbListTables(con)
-print('--- after dropping ---')
-print(after)
-
-# # Recreate tables
-system("sqlite3 Boxscores.db '.read boxscores.sql'")
-
-# Get list of tables after recreation
-after <- dbListTables(con)
-print('--- after recreating ---')
-print(after)
-
-# Disconnect
+# Disconnect from the database  
 dbDisconnect(con)
 
 print("Done")
-

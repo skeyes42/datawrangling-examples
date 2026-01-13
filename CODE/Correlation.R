@@ -1,7 +1,11 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_28_Correlation.R
+# FILE: Correlation.R
 # DATE 2025-11-01
 # DESCRIPTION: 
+# This R program is a statistical script designed to calculate a correlation 
+# matrix for basketball performance metrics. It identifies how strongly 
+# different statistics (like points, assists, and rebounds) are related to 
+# one another.
 
 library(dplyr)
 library(RSQLite)
@@ -29,4 +33,5 @@ correlation_matrix <- results_df |>
   cor(use = "complete.obs") # handles missing values if any
 
 # View the result
+options(width = 200)
 print(correlation_matrix)

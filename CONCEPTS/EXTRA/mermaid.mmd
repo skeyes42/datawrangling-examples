@@ -1,0 +1,20 @@
+classDiagram
+    class Player {
+        +int player_id
+        +int fgm
+        +int fg3m
+        +int ftm
+    }
+    
+    class Game {
+        +int game_id
+        +players : List~Player~
+    }
+    
+    class Season {
+        +games : List~Game~
+    }
+    
+    Season "1" o-- "*" Game : contains
+    Game "1" o-- "*" Player : contains
+

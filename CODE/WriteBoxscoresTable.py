@@ -1,7 +1,10 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_3_WriteBoxscoresTable.py
+# FILE: WriteBoxscoresTable.py
 # DATE 2025-10-13
 # DESCRIPTION: Overwrite Players table
+# This Python program demonstrates how to initialize or reset a database table 
+# by converting raw text data (CSV format) into a structured SQL table using 
+# pandas and sqlite3.
 
 import os
 import sqlite3

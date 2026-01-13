@@ -1,81 +1,85 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_22_PlotBarChart.py
+# FILE: PlotBarChart.py
 # DATE 2025-10-27
 # DESCRIPTION: 
+# This Python program is a specialized data visualization script designed 
+# for player performance analysis. It extracts specific shooting statistics 
+# for a player named "John" and generates a patterned bar chart to compare 
+# different types of made shots across multiple games.
 
-import sqlite3
 import pandas as pd
-import os
+import sqlite3
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 
-# Connect to the database
-path_to_database = os.path.join(os.getenv("EXAMPLES", ""), "Boxscores.db")
-try:
-    con = sqlite3.connect(path_to_database)
-except sqlite3.Error as e:
-    print(f"Error connecting to database: {e}")
-    con = None
+path_to_scripts = os.getenv("EXAMPLES")
+path_to_database = os.path.join(os.getenv("EXAMPLES"), "Boxscores.db")
 
-if con:
-    # Build query using pandas and execute
-    # pandas uses pd.read_sql_query to run a SQL query directly on a database connection
-    # and return the result as a DataFrame.
-    sql_query = """
-    SELECT
-        T1.GAME_ID,
-        T1.TEAM_ID,
-        T2.PLAYER_NAME AS Player,
-        T3.TEAM_NAME AS Team,
-        T1.FGM,
-        T1.FG3M,
-        T1.FTM
-    FROM
-        Boxscores AS T1
-    LEFT JOIN
-        Players AS T2 ON T1.PLAYER_ID = T2.PLAYER_ID
-    LEFT JOIN
-        Teams AS T3 ON T1.TEAM_ID = T3.TEAM_ID
-    WHERE
-        Player = 'John'
-    ORDER BY
-        T1.GAME_ID, T1.TEAM_ID
-    """
+# Connect to database
+con = sqlite3.connect(path_to_database)
 
-    try:
-        results_df = pd.read_sql_query(sql_query, con)
-    except pd.io.sql.DatabaseError as e:
-        print(f"Error executing SQL query: {e}")
-        results_df = pd.DataFrame()
+# Build and execute query
+query = """
+SELECT b.*, p.PLAYER_NAME as Player, t.TEAM_NAME as Team
+FROM Boxscores b
+LEFT JOIN Players p ON b.PLAYER_ID = p.PLAYER_ID
+LEFT JOIN Teams t ON b.TEAM_ID = t.TEAM_ID
+WHERE p.PLAYER_NAME = 'John'
+ORDER BY b.GAME_ID, b.TEAM_ID
+"""
 
-    # Reshape the data from wide to long format using pandas.melt()
-    results_long_df = pd.melt(
-        results_df,
-        id_vars=["GAME_ID", "Team", "Player"],
-        value_vars=["FGM", "FG3M", "FTM"],
-        var_name="Stat_Type",
-        value_name="Count"
-    )
+results_df = pd.read_sql_query(query, con)
+results_df = results_df.drop(columns=['PLAYER_ID', 'TEAM_ID'])
 
-    # Create the grouped bar chart using seaborn and matplotlib
-    # Seaborn is a high-level plotting library built on matplotlib that is 
-    # well-suited for statistical graphics.
-    plt.figure(figsize=(10, 6))
-    sns.barplot(
-        x="GAME_ID",
-        y="Count",
-        hue="Stat_Type",
-        data=results_long_df,
-        palette={"FGM": "steelblue", "FG3M": "darkorange", "FTM": "darkgreen"}
-    )
-    plt.title("FGM, FG3M, and FTM by Game for John")
-    plt.xlabel("Game ID")
-    plt.ylabel("Count")
-    plt.legend(title="Statistic")
-    plt.show()
+# Reshape to long format
+results_long_df = pd.melt(
+    results_df,
+    id_vars=[col for col in results_df.columns if col not in ['FGM', 'FG3M', 'FTM']],
+    value_vars=['FGM', 'FG3M', 'FTM'],
+    var_name='Stat_Type',
+    value_name='Count'
+)
 
-    # Disconnect
-    con.close()
+results_long_df.to_csv("Results_Long.csv", index=False)
 
-    print("Done")
+# Create grouped bar chart with patterns
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# Define patterns (hatches) for each stat type
+patterns = {'FGM': '///', 'FG3M': 'xxx', 'FTM': '...'}
+colors = {'FGM': 'gray', 'FG3M': 'gray', 'FTM': 'gray'}
+
+# Get unique games and stat types
+games = results_long_df['GAME_ID'].unique()
+stat_types = ['FGM', 'FG3M', 'FTM']
+x = range(len(games))
+width = 0.25
+
+# Create bars for each stat type with different patterns
+for i, stat in enumerate(stat_types):
+    data = results_long_df[results_long_df['Stat_Type'] == stat]
+    values = [data[data['GAME_ID'] == game]['Count'].values[0] if len(data[data['GAME_ID'] == game]) > 0 else 0 
+              for game in games]
+    
+    bars = ax.bar([xi + i*width for xi in x], values, width, 
+                   label=stat, 
+                   color=colors[stat],
+                   edgecolor='black',
+                   hatch=patterns[stat])
+
+ax.set_xlabel('Game ID')
+ax.set_ylabel('Count')
+ax.set_title('FGM, FG3M, and FTM by Game for John')
+ax.set_xticks([xi + width for xi in x])
+ax.set_xticklabels(games)
+ax.legend(title='Statistic')
+ax.grid(axis='y', alpha=0.3)
+
+plt.tight_layout()
+plt.savefig('bar_chart_patterns.png', dpi=300, bbox_inches='tight')
+plt.show()
+
+con.close()
+print("Done")
 

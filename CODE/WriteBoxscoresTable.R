@@ -1,5 +1,5 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_3_WriteBoxscoresTable.R
+# FILE: WriteBoxscoresTable.R
 # DATE 2025-10-13
 # DESCRIPTION: Overwrite Players table 
 
@@ -37,7 +37,7 @@ dbWriteTable(con, "Players", Players_data_df, overwrite = TRUE)
 # Verify the table was written by reading it back into R
 # The `dbReadTable()` function reads an entire database table.
 results_df <- dbReadTable(con, "Players")
-print(results_df)
+print(results_df, width = Inf)
 
 
 # Clean up: Disconnect from the database

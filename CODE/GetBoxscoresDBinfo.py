@@ -1,7 +1,10 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_0_GetBoxscoresDBinfo.py
+# FILE: GetBoxscoresDBinfo.py
 # DATE 2025-10-19
 # DESCRIPTION: 
+# This Python program is a database inspection tool. It is used to 
+# discover the structure of an SQLite database by listing all available 
+# tables and then detailing every column within a specific table.
 
 import sqlite3
 import os

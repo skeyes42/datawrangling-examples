@@ -1,11 +1,15 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_27_2by2Table.R
+# FILE: 2by2Table.R
 # DATE 2025-11-01
 # DESCRIPTION: 
+# This R program performs a "database-to-table" workflow by retrieving 
+# basketball statistics from a database and organizing them into a 
+# formatted frequency table.
 
 library(dplyr)
 library(RSQLite)
 library(DBI)
+library(janitor)
 
 # Connect to database
 path_to_database <- paste0(Sys.getenv("EXAMPLES"), "Boxscores.db")

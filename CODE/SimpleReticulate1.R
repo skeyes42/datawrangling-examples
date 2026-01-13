@@ -1,8 +1,10 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_15a_SimpleReticulate.R
+# FILE: SimpleReticulate.R
 # DATE 2025-10-16
 # DESCRIPTION: 
-
+# This R program utilizes the reticulate library to bridge R and Python 
+# environments, allowing R code to seamlessly execute Python functions 
+# and access powerful Python data science libraries like pandas and nba_api.
 
 library(reticulate)
 

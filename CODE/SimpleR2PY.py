@@ -1,7 +1,10 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_17_SimpleR2PY.py
+# FILE: SimpleR2PY.py
 # DATE 2025-10-17
 # DESCRIPTION: 
+# This program demonstrates interoperability between Python and R using 
+# the rpy2 library. It allows you to write high-level logic in Python 
+# while using specific mathematical or statistical functions written in R.
 
 import rpy2.robjects as robjects
 import os
@@ -15,7 +18,7 @@ python_data = [4, 9, 16, 25]
 
 # Path to the R script
 script_dir = os.path.dirname(os.path.abspath(__file__))
-r_script_path = os.path.join(script_dir, "Example_17a_SimpleR2PY.R")
+r_script_path = os.path.join(script_dir, "SimpleR2PY.R")
 
 # Read the R script into a string
 with open(r_script_path, 'r') as f:

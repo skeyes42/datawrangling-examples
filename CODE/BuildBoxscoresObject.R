@@ -1,7 +1,10 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_11_BuildBoxscoresObject.R
+# FILE: BuildBoxscoresObject.R
 # DATE 2025-10-16
 # DESCRIPTION: 
+# This R program performs the exact same task as the Python version 
+# you provided—merging sports database tables—but uses R's functional 
+# programming style and the modern S7 object-oriented system.
 
 
 library(RSQLite)

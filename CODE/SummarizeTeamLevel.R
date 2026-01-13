@@ -1,7 +1,11 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_8_SummarizeTeamLevel.R
+# FILE: SummarizeTeamLevel.R
 # DATE 2025-10-13
 # DESCRIPTION: 
+# This R program calculates and stores the season summary statistics 
+# for a set of basketball teams. It moves from detailed, player-level 
+# data to high-level, team-level averages and total wins, then saves 
+# these results as a new, clean table in the database.
 
 library(RSQLite)
 library(DBI)
@@ -22,25 +26,24 @@ if (!("PTS" %in% dbListFields(con, "Boxscores"))) {
     call. = FALSE)
 }
 
-# Setup the query
 query <- tbl(con, "Boxscores") |>
-  group_by(TEAM_ID, GAME_ID) |>
-  summarise(
-    FG_PCT_AVG = mean(FG_PCT),
-    FG3_PCT_AVG = mean(FG3_PCT),
-    FT_PCT_AVG = mean(FT_PCT),
-    GAME_WIN = max(WIN_LOSS),
-    .groups = "drop"
-  ) |>
-  group_by(TEAM_ID) |>
-  summarise(
-    FG_PCT_AVG = mean(FG_PCT_AVG),
-    FG3_PCT_AVG = mean(FG3_PCT_AVG),
-    FT_PCT_AVG = mean(FT_PCT_AVG),
-    SEASON_WINS = sum(GAME_WIN),
-    .groups = "drop"
-  )
-
+    group_by(TEAM_ID, GAME_ID) |>
+    summarise(
+      FG_PCT_AVG = mean(FG_PCT),
+      FG3_PCT_AVG = mean(FG3_PCT),
+      FT_PCT_AVG = mean(FT_PCT),
+      GAME_WIN = max(WIN_LOSS),
+      .groups = "drop"
+    ) |>
+      group_by(TEAM_ID) |>
+      summarise(
+        FG_PCT_AVG = mean(FG_PCT_AVG),
+        FG3_PCT_AVG = mean(FG3_PCT_AVG),
+        FT_PCT_AVG = mean(FT_PCT_AVG),
+        SEASON_WINS = sum(GAME_WIN),
+        .groups = "drop"
+      ) |>
+        left_join(tbl(con, "Teams"), join_by(TEAM_ID))
 
 # Display the query
 show_query(query) 
@@ -61,5 +64,7 @@ dbWriteTable(
 dbDisconnect(con)
 
 print(results_df)
+
+write_csv(results_df, "teams_with_name.csv")
 
 print("Done")

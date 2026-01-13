@@ -1,7 +1,10 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_24_ScatterPlot.R
+# FILE: ScatterPlot.R
 # DATE 2025-10-27
 # DESCRIPTION: 
+# This R program performs an end-to-end data analysis workflow: it connects 
+# to a database, performs complex table joins using dbplyr, and creates a 
+# professional visualization using ggplot2.
 
 library(ggplot2)
 library(DBI)
@@ -24,14 +27,15 @@ query <- tbl(con, "Boxscores") |>
 results_df <- query |>
   collect()
 
-# Create scatter plot
-p <- ggplot(results_df, aes(x = FG3M, y = FGM, color = factor(Player))) +
-  geom_point(size = 3) +
+# Create scatter plot with different shapes
+p <- ggplot(results_df, aes(x = FG3M, y = FGM, shape = factor(Player))) +
+  geom_point(size = 3, fill = "gray50", color = "black") +
+  scale_shape_manual(values = c(21, 22, 23, 24, 25, 8)) +
   labs(
     title = "Field Goals Made vs 3-Point Field Goals Made",
     x = "3-Point Field Goals Made (FG3M)",
     y = "Field Goals Made (FGM)",
-    color = "Player ID"
+    shape = "Player ID"
   ) +
   theme_minimal() +
   theme(

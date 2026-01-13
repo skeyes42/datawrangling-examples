@@ -1,7 +1,10 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_23_PlotLineChart.py
+# FILE: PlotLineChart.py
 # DATE 2025-10-26
 # DESCRIPTION: 
+# This Python program retrieves 2025 sports statistics from a 
+# database and creates a line plot to analyze the relationship 
+# between a team's shooting accuracy and their total wins.
 
 import sqlite3
 import os
@@ -43,3 +46,4 @@ plt.style.use('seaborn-v0_8-whitegrid')
 
 plt.tight_layout()
 plt.show()
+

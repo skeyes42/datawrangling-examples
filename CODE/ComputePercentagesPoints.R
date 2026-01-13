@@ -1,7 +1,10 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_6_ComputePercentagesPoints.R
+# FILE: ComputePercentagesPoints.R
 # DATE 2025-10-13
 # DESCRIPTION: 
+# This R program is a powerful data processing script that uses the dplyr and 
+# DBI packages to calculate basketball statistics directly within a SQLite 
+# database file and save the results.
 
 library(RSQLite)
 library(DBI)

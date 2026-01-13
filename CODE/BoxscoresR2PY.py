@@ -1,7 +1,11 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_18_BoxscoresR2PY.py
+# FILE: BoxscoresR2PY.py
 # DATE 2025-10-17
 # DESCRIPTION: 
+# This program is a data pipeline that uses Python as a "wrapper" to 
+# execute R code. Its primary purpose is to retrieve complex data 
+# structured in R and convert it into a standard Pandas DataFrame for 
+# use in Python.
 
 import pandas as pd
 import rpy2.robjects as ro

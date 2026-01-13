@@ -1,7 +1,10 @@
 # Copyright 2025 by Steven J. Keyes. All rights reserved.
-# FILE: Example_27_2by2Table.py
+# FILE: 2by2Table.py
 # DATE 2025-11-01
 # DESCRIPTION: 
+# This Python program retrieves basketball statistics from a database and organizes 
+# them into a contingency table (cross-tabulation) to analyze the relationship between 
+# two specific metrics. 
 
 import pandas as pd
 import sqlite3
