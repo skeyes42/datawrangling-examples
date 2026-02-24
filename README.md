@@ -1,143 +1,167 @@
-**Project Overview**
+# Side-by-Side R and Python Data Wrangling Examples
 
-**Title:** Side-by-Side R and Python Data Wrangling: Using SQLite3, Reticulate, RPY2 with OO and AI
+Working code repository for *Side-by-Side R and Python Data Wrangling using SQLite3, Reticulate, RPY2 and Rserve with OO* 
+by Steve Keyes. Every example in the book has a corresponding R and Python 
+implementation here.
 
-**Description:**
+Related: [Using Python OOP to Analyze NBA Boxscore Data](https://medium.com/@skeyes42/using-python-oop-to-analyze-nba-boxscore-data-be313120bd18) 
+| [Article repo](https://github.com/skeyes42/OOviewBoxscoreData)
 
-The purpose of the book is 5-fold:
+---
 
--   Presentation of foundational topics in the **Foundations** section that explain essential and practical concepts used in defining the “middle” part of the data science workflow: data wrangling (see more detail in the introduction). The goal is not to get lost in an exhaustive attempt to catalog all the features of a particular concept or technology, but rather to provide what’s essential and practical for getting the job done. In other words, the code examples and their comparisons with each other offer **a way** to do things, not **the way**.
--   Presentation of in R and Python (with a common underlying SQLite database infrastructure) that address these data wrangling concepts. The code examples start with a simple, flat set of NBA boxscore-like data and, through the data wrangling process, result in a dataset that ready for exploratory data analysis (EDA) and modeling.
--   From “R versus Python” to “R and Python” working together to leverage their respective strengths, the book presents a discussion of Reticulate and RPY2 technologies at work in R and Python code examples.
--   From a view of boxscore data as flat/relational to a view of boxscore data as object-oriented and hierarchical, the book presents code examples in R and Python using OOP to offer an alternate to what’s being in the analysis of boxscore data. (See my Medium article: “Using Python OOP to Analyze NBA Boxscore Data”.)
--   The moral of the “story” is to leave you equipped to begin his or her own journey in data wrangling.
+## What's in this repo
 
-    **Audience:**
+All examples run against a shared SQLite database (Boxscores.db) built from 
+simplified NBA boxscore data — 3 teams, 2 players per team, 3 games per season. 
+Small enough to see every transformation clearly, realistic enough to matter.
+```
+datawrangling-examples/
+│
+├── code/
+│   ├── concepts/          ← R and Python code for Foundations chapters (3–10)
+│   └── examples/          ← R and Python code for Applied chapters (12–25)
+│
+├── data/
+│   └── boxscores/
+│       ├── csv/           ← CSV files for loading database tables
+│       ├── sql/           ← SQL scripts for database setup and manipulation
+│       └── library/       ← Boxscores, Players, Teams & Season class definitions
+│
+└── doc/                   ← Markdown documentation for all examples
+```
 
-    This book is intended for readers who have some (perhaps limited) experience with R, Python and SQLite. It is not intended to be a tutorial. There are several excellent books on these topics – see References below. For readers learning about data wrangling, the book offers a concise conceptual explanation of basic data wrangling in R and Python using SQLite, as well as practical applications of the concepts in the working code examples. As mentioned above, the book offers “a way” instead of “the way” to understand data wrangling, so for more experienced readers there’s an opportunity to get a fresh look at “how the other guy did it” using individual chapters as reference material.
+The database lives at:
+```
+datawrangling-examples/data/boxscores/Boxscores.db
+```
 
-    **Side-by-side approach:**
+---
 
-    This book presents several examples relevant to data wrangling. For each example, I provide R example code, and equivalent Python code – pointing out similarities and differences between the two. In addition to contrasting R and Python, I provide examples of R and Python co-operating using the reticulate and RPY2 features.
+## Setup
 
-    **Target audience:**
+### Prerequisites
+- R (from [CRAN](https://cran.r-project.org/))
+- Python 3.x (from [python.org](https://www.python.org/))
+- Git
 
-    This book is intended for readers who have some (perhaps limited) experience with R, Python and SQLite. It is not intended to be a tutorial. There are several excellent books on these topics – see References below. For readers learning about data wrangling, the book offers a concise conceptual explanation of basic data wrangling in R and Python using SQLite, as well as practical applications of the concepts in the working code examples. As mentioned above, the book offers “a way” instead of “the way” to understand data wrangling, so for more experienced readers there’s an opportunity to get a fresh look at “how the other guy did it” using individual chapters as reference material.
+### Step 1 — Clone the repo
+```bash
+git clone https://github.com/skeyes42/datawrangling-examples.git
+cd datawrangling-examples
+```
 
-**About me:**
-
-Steven Keyes (Steve) holds a BS in computer science, and a Master’s degree in data science related studies.
-
-Steve is a retired software developer who worked for SAP on the Document Builder development team. He was responsible for building the database, and for designing and coding the related XSLT transformations. Steve holds two shared patents for Document Builder.
-
-On leaving SAP, Steve created his own consulting company (@Keyes42 Tech) which provided Document Builder consulting services through a certified SAP consulting company.
-
-In addition to his coding and database design experience, he has worked on Python and R projects to do sports analytics using NBA statistics.
-
-**Repository Structure**
-
-**└───datawrangling-examples**
-
-**├───CODE**
-
-**├───EXTRA**
-
-**├───CONCEPTS**
-
-**│ └───EXTRA**
-
-**├───DATA**
-
-**│ └───Boxscores**
-
-**│ └───LIBRARY \_**
-
-**└───DOC**
-
-**├───CODE**
-
-**└───CONCEPTS**
-
-The **CODE** directory contains the main examples – examples that use the full boxscore datasets. These examples are presented and discussed in the **How To** section of the book.
-
-The **CONCEPTS** directory contains shorter examples that are used to present and explain concepts found in the **Foundations** section of the book.
-
-The **DOC** directories contain the markdown files for each example.
-
-**Technical Requirements**
-
-**Here are the R packages required to run the examples:**
-
-\# Core data manipulation packages
-
+### Step 2 — Install R packages
+```r
+# Data manipulation
 install.packages("dplyr")
-
 install.packages("tidyverse")
-
 install.packages("readr")
-
 install.packages("stringr")
-
 install.packages("janitor")
+install.packages("purrr")
 
-install.packages(“purrr”)
-
-\# Database packages
-
+# Database
 install.packages("DBI")
-
 install.packages("RSQLite")
-
 install.packages("dbplyr")
 
-\# Visualization packages
-
+# Visualization
 install.packages("ggplot2")
-
-install.packages(“ggpattern”)
-
+install.packages("ggpattern")
 install.packages("rhandsontable")
 
-\# Cross-language interoperability
-
+# Cross-language interoperability
 install.packages("reticulate")
+install.packages("Rserve")
 
-\# Object-oriented programming
-
+# Object-oriented programming
 install.packages("S7")
+```
 
-**Here are the Python libraries required to run the examples:**
-
-\# Core data science libraries
-
+### Step 3 — Install Python libraries
+```bash
+# Core
 pip install pandas numpy matplotlib seaborn
 
-\# Cross-language interoperability
+# Cross-language interoperability
+pip install rpy2 pyRserve
 
-pip install rpy2
-
-\# Database libraries
-
-pip install sqlite
-
-\# Additional utilities
-
+# Utilities
 pip install attrs pandastable nba_api plotnine
+```
 
-**Setting up the database:**
+### Step 4 — Set environment variable
 
-Database SQL scripts are in the DATA\\boxscores directory of the repo.
+Set the `EXAMPLES` environment variable to the root of the cloned repo.
 
-The initial Boxscore.db database can be setup by:
+**Windows (PowerShell):**
+```powershell
+[Environment]::SetEnvironmentVariable("EXAMPLES", "C:\path\to\datawrangling-examples", "User")
+```
 
-Open a terminal and navigate to:
+**Linux/Mac:**
+```bash
+echo 'export EXAMPLES="/path/to/datawrangling-examples"' >> ~/.bashrc
+source ~/.bashrc
+```
 
-datawrangling-examples\\DATA\\boxscores
+### Step 5 — Load the database
+```bash
+cd data/boxscores/sql
+sqlite3 ../Boxscores.db < create_boxscores.sql
+```
 
-Run sqlite3 specifying the Boxscores.db database
+---
 
-In the sqlite3 REPL run the boxscores.sql script
+## Verify your setup
 
-**Contact/Links**
+**R:**
+```r
+library(DBI)
+library(RSQLite)
 
-**You can contact me at:** [skeyes42@gmail.com](mailto:skeyes42@gmail.com) **and on LinkedIn.**
+con <- dbConnect(RSQLite::SQLite(), 
+                 file.path(Sys.getenv("EXAMPLES"), 
+                 "data/boxscores/Boxscores.db"))
+dbListTables(con)
+# Should return: Boxscores, Players, Teams, Season2025
+dbDisconnect(con)
+```
+
+**Python:**
+```python
+import sqlite3
+import os
+
+db_path = os.path.join(os.environ["EXAMPLES"], "data/boxscores/Boxscores.db")
+con = sqlite3.connect(db_path)
+cursor = con.cursor()
+cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+print(cursor.fetchall())
+# Should return: [('Boxscores',), ('Players',), ('Teams',), ('Season2025',)]
+con.close()
+```
+
+If both return the four table names, you're ready to go.
+
+---
+
+## Where to start
+
+If you're new to the repo, start with the Foundations chapters:
+
+| Topic | R file | Python file |
+|---|---|---|
+| Joins and merges | `code/concepts/joins.R` | `code/concepts/joins.py` |
+| Chaining | `code/concepts/chaining.R` | `code/concepts/chaining.py` |
+| Variable creation | `code/concepts/variables.R` | `code/concepts/variables.py` |
+| Summarize/aggregate | `code/concepts/summarize.R` | `code/concepts/summarize.py` |
+| Classes | `code/concepts/classes.R` | `code/concepts/classes.py` |
+
+Full documentation for every example is in the `doc/` folder.
+
+---
+
+## Questions or issues
+
+Open a GitHub issue or reach out at skeyes42@gmail.com
